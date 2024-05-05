@@ -1,0 +1,28 @@
+#searchbar-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+#search-button-img{
+    height: 15px;
+    width: 15px;
+    margin-left: -1px;
+}
+
+#search-button{
+    background: none;
+    cursor: pointer;
+    border-width: 1px;
+    border-radius: 0 20px 20px 0;
+}
+
+#searchbar-wrapper{
+    margin-right: 1%;
+}
+
+#nav-search-bar{
+    width: 200px;
+    height: 18px;
+    border-radius: 20px 0 0 20px;
+    border-width: 1px;
+}
