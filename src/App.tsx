@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UsersContext } from './Context';
+import Layout from './pages/Layout/Layout';
+import Home from './pages/Home/Home';
+import NoMatch from './pages/NoMatch/NoMatch';
 
 function App() {
   const [users, setUsers] = useState<string[]>([])
   
   return (
     <UsersContext.Provider value={{users, setUsers}}>
-      <div id='app-wrapper'>
-      <Navbar/>
-      <main id='app-main'>
-        {users.map((user, index) => <p key={index}>{user}</p>)}
-      </main>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout/>}>
+            <Route index element={<Home/>}/>
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </UsersContext.Provider>
     
   )
