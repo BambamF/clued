@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav id='app-navbar'>
         <MenuButton/>
-        <header id='app-header'><Link to='/'>memory bank</Link></header>
+        <Link to='/' id='header-link'><h3>memory bank</h3></Link>
         <SearchBar/>
     </nav>
   )

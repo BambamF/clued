@@ -5,7 +5,6 @@ app = Flask(__name__)
 cors = CORS(app, origins='*')
 
 @app.route("/users", methods=['GET', 'POST', 'PUT', 'DELETE'])
-
 def users():
     return jsonify(
         {

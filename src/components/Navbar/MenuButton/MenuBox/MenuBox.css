@@ -1,0 +1,33 @@
+#menu-box{
+    position: absolute;
+    background-color: transparent;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 30px;
+    top: 50px;
+    border-radius: 20px;
+    border-color: whitesmoke;
+    box-shadow: 2px 3px 6px 1px rgba(235, 234, 234, 0.923);
+}
+
+.menu-link{
+    text-decoration: none;
+    color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu-link:hover{
+    border-radius: 20px;
+    background-color: rgb(35, 33, 33);
+    text-shadow: 0 0 1px white;
+    cursor: pointer;
+}

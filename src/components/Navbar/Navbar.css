@@ -6,6 +6,9 @@
     height: 5%;
 }
 
-#app-header{
+
+#header-link{
+    text-decoration: none;
+    color: whitesmoke;
     margin-left: 14%;
 }

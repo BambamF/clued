@@ -10,3 +10,7 @@
     border: none;
     cursor: pointer;
 }
+
+#menu-button-wrapper{
+    position: relative;
+}
