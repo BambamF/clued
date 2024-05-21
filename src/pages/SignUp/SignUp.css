@@ -36,6 +36,10 @@
     margin-left: -13.5%;
 }
 
+#email-signup-label{
+    margin-left: -7.5%;
+}
+
 #createpassword-signup-label{
     margin-left: -9%;
 }
@@ -45,11 +49,11 @@
 }
 
 #dob-signup-label{
-    margin-left: -8%;
+    margin-left: -14%;
 }
 
 #dob-signup-input{
-    width: 40%;
+    width: 60%;
 }
 
 .password-wrapper{
@@ -75,4 +79,9 @@
     margin-right: 27%;
     background-color: rgb(66, 143, 215);
     color: whitesmoke;
+}
+
+.text-red-500{
+    color: red;
+    font-size: small;
 }
