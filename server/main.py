@@ -10,6 +10,29 @@ def get_users():
     json_users = list(map(lambda x: x.to_json(), users))
     return jsonify({"users": json_users})
 
+@app.route("/sign-in", methods=["POST"])
+def sign_in(user_id):
+    email = request.json.get("email")
+    password = request.json.get("password")
+    user = User.query.get(user_id)
+
+    if not email or not password:
+        return(
+            jsonify({"message": "All fields are required!"}),
+            400
+        )
+    if not user:
+        return(
+            jsonify({"message": "User not found!"}),
+            400
+        )
+    else:
+        return(
+            jsonify({"message": "User authenticated!", "user": user.to_json()}),
+            200
+        )
+    
+
 # route to add a new user to the database
 @app.route("/sign-up", methods=["POST"])
 def sign_up():
@@ -23,7 +46,7 @@ def sign_up():
     if not first_name or not last_name or not username or not email or not dob:
         return (
             jsonify({"message": "All fields are required"}), 
-            400,
+            404,
                 )
     
     new_user = User(first_name=first_name, last_name=last_name, username=username, email=email, dob=dob)
