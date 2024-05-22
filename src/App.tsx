@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UsersContext } from './Context';
+import { UsersContext, SignedInContext } from './Context';
 import Layout from './pages/Layout/Layout';
 import Home from './pages/Home/Home';
 import NoMatch from './pages/NoMatch/NoMatch';
@@ -13,9 +13,11 @@ import Settings from './pages/Settings/Settings';
 
 function App() {
   const [users, setUsers] = useState<string[]>([])
+  const [signedIn, setSignedIn] = useState<boolean>(false)
   
   return (
-    <UsersContext.Provider value={{users, setUsers}}>
+    <SignedInContext.Provider value={{signedIn, setSignedIn}}>
+      <UsersContext.Provider value={{users, setUsers}}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout/>}>
@@ -30,7 +32,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </UsersContext.Provider>
-    
+    </SignedInContext.Provider>
   )
 }
 
