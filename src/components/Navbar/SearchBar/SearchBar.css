@@ -1,6 +1,7 @@
 #searchbar-wrapper{
     display: flex;
     flex-direction: row;
+    margin-right: 1%;
 }
 
 #search-button-img{
@@ -16,13 +17,10 @@
     border-radius: 0 20px 20px 0;
 }
 
-#searchbar-wrapper{
-    margin-right: 1%;
-}
-
 #nav-search-bar{
     width: 200px;
     height: 18px;
     border-radius: 20px 0 0 20px;
     border-width: 1px;
+    padding-left: 5px;
 }

@@ -6,6 +6,10 @@
     width: 100%;
 }
 
+#signin-header{
+    color: black;
+}
+
 #signin-form{
     display: flex;
     flex-direction: column;

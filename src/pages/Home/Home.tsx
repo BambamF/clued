@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import './Home.css';
+import Clue from '../../components/Clue/Clue';
 
 const Home = () => {
  
   return (
     <div id='home-wrapper'>
-      <p>Home</p>
+      <Clue/>
     </div>
   )
 }

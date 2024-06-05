@@ -8,7 +8,7 @@ import NoMatch from './pages/NoMatch/NoMatch';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import Profile from './pages/Profile/Profile';
-import Memories from './pages/Memories/Memories';
+import Clues from './pages/Clues/Clues';
 import Settings from './pages/Settings/Settings';
 
 function App() {
@@ -16,7 +16,8 @@ function App() {
   const [signedIn, setSignedIn] = useState<boolean>(false)
   
   return (
-    <SignedInContext.Provider value={{signedIn, setSignedIn}}>
+    <div id='app-wrapper'>
+      <SignedInContext.Provider value={{signedIn, setSignedIn}}>
       <UsersContext.Provider value={{users, setUsers}}>
       <BrowserRouter>
         <Routes>
@@ -25,7 +26,7 @@ function App() {
             <Route path='sign-in' element={<SignIn/>}/>
             <Route path='sign-up' element={<SignUp/>}/>
             <Route path='profile' element={<Profile/>}/>
-            <Route path='memories' element={<Memories/>}/>
+            <Route path='clues' element={<Clues/>}/>
             <Route path='settings' element={<Settings/>}/>
             <Route path="*" element={<NoMatch />} />
           </Route>
@@ -33,6 +34,8 @@ function App() {
       </BrowserRouter>
     </UsersContext.Provider>
     </SignedInContext.Provider>
+    </div>
+    
   )
 }
 

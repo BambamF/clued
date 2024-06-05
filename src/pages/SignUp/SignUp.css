@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+#signup-header{
+    color: black;
+}
+
 #signup-form{
     background-color: whitesmoke;
     display: flex;

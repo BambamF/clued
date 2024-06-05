@@ -3,12 +3,27 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 5%;
+    height: 8%;
+    width: 100%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
 }
 
 
 #header-link{
     text-decoration: none;
     color: whitesmoke;
-    margin-left: 14%;
+    margin-left: 17%;
+}
+
+#nav-profile-img{
+    height: 27px;
+    cursor: pointer;
+}
+
+#nav-search-profile-wrapper{
+display: flex;
+height: 100%;
+align-items: center;
+margin-right: 1%;
 }

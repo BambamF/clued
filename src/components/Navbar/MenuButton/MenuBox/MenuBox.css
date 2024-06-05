@@ -27,7 +27,8 @@
 
 .menu-link:hover{
     border-radius: 20px;
-    background-color: rgb(35, 33, 33);
+    background-color: transparent;
     text-shadow: 0 0 1px white;
+    box-shadow: 2px 5px 7px 1px rgba(235, 234, 234, 0.923);
     cursor: pointer;
 }

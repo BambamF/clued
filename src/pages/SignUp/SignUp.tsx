@@ -102,7 +102,7 @@ const schema = z.object({
       return (
           <div id='signup-wrapper'>
               <form id='signup-form' onSubmit={handleSubmit(handleSignupSubmit)}>
-                  <p>Sign Up</p>
+                  <p id='signup-header'>Sign Up</p>
                   <label id='firstname-signup-label'>First Name:<input type='text' className='signup-input' id='firstname' {...register("firstName")}
                   ></input></label>
                   {errors.firstName && <span className='text-red-500'>{errors.firstName.message}</span>}

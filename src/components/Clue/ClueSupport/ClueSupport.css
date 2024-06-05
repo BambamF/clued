@@ -1,0 +1,24 @@
+#clue-support-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.clue-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    height: 60px;
+    width: 60px;
+    background: none;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.clue-link-image{
+    width: 70%;
+}

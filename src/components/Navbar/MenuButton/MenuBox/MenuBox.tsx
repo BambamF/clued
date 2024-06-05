@@ -6,7 +6,7 @@ const MenuBox = () => {
   return (
     <div id='menu-box'>
         <Link to={'/profile'} className='menu-link'>profile</Link>
-        <Link to={'/memories'} className='menu-link'>memories</Link>
+        <Link to={'/clues'} className='menu-link'>clues</Link>
         <Link to={'/settings'} className='menu-link'>settings</Link>
     </div>
   )

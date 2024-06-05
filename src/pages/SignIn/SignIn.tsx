@@ -68,7 +68,7 @@ const SignIn = () => {
   return (
     <div id='signin-wrapper'>
         <form id='signin-form' onSubmit={handleSubmit(handleSigninSubmit)}>
-            <p>Sign In</p>
+            <p id='signin-header'>Sign In</p>
             <input type='email' className='signin-input' placeholder='email' {...register("email")}/>
             {errors.email && <span className='text-red-500'>{errors.email.message}</span>}
             <div id='password-wrapper'>
