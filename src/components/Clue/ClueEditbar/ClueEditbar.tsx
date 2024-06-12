@@ -29,6 +29,7 @@ const ClueEditbar = () => {
 
     const handleAddButtonClick = () => {
       setSupplementActive(false);
+      setSupportActive(false);
     }
 
     const handleSupportClick = () => {

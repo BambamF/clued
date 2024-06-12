@@ -1,0 +1,16 @@
+
+#nav-profile-img{
+    height: 28px;
+    width: 28px;
+}
+
+#nav-profile-button{
+    margin-left: 2%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#profile-button-wrapper{
+    position: relative;
+}

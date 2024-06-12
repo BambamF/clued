@@ -59,3 +59,53 @@ export const SupportContext = createContext<SupportContextType>({
   supportActive: false,
   setSupportActive: () => {},
 });
+
+type ClueNotesContextType = {
+  clueNotes: string;
+  setClueNotes: Dispatch<SetStateAction<string>>;
+};
+
+export const ClueNotesContext = createContext<ClueNotesContextType>({
+  clueNotes: "",
+  setClueNotes: () => {},
+});
+
+type ClueDateContextType = {
+  clueDate: Date;
+  setClueDate: Dispatch<SetStateAction<Date>>;
+};
+
+export const ClueDateContext = createContext<ClueDateContextType>({
+  clueDate: new Date(),
+  setClueDate: () => {},
+});
+
+type ClueTitleContextType = {
+  clueTitle: string;
+  setClueTitle: Dispatch<SetStateAction<string>>;
+};
+
+export const ClueTitleContext = createContext<ClueTitleContextType>({
+  clueTitle: "",
+  setClueTitle: () => {},
+});
+
+type ClueMainFileContextType = {
+  clueMainFile: string;
+  setClueMainFile: Dispatch<SetStateAction<string>>;
+};
+
+export const ClueMainFileContext = createContext<ClueMainFileContextType>({
+  clueMainFile: "",
+  setClueMainFile: () => {},
+});
+
+type ClueTimeContextType = {
+  clueTime: string;
+  setClueTime: Dispatch<SetStateAction<string>>;
+};
+
+export const ClueTimeContext = createContext<ClueTimeContextType>({
+  clueTime: "",
+  setClueTime: () => {},
+});

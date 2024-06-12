@@ -6,6 +6,7 @@
     width: 40%;
     height: 100%;
     padding: 2%;
+    margin-top: 4%;
 }
 
 #clue-main-header{
@@ -16,6 +17,10 @@
     margin-bottom: 1%;
 }
 
+#clue-title-input{
+    border-radius: 10px;
+}
+
 #clue-main-thumbnail{
     width: 100%;
     height: 65%;
@@ -23,14 +28,57 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     background-color: rgb(3, 3, 3);
     border-radius: 10%;
     box-shadow: 2px 3px 6px rgba(247, 246, 246, 0.644);
 }
 
-.clue-main-thumbnail-button{
-    height: 36%;
-    width: 13%;
+#clue-file-uploaded{
+    width: 65%;
+    border-radius: 10%;
+    box-shadow: 2px 3px 6px rgba(247, 246, 246, 0.644);
+}
+#clue-file-uploaded-pdf{
+    width: 90%;
+    height: 95%;
+    border-radius: 10%;
+    box-shadow: 2px 3px 6px rgba(247, 246, 246, 0.644);
+}
+
+#clue-main-uploaded{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#cancel-clue-main{
+    position: absolute;
+    background: none;
+    border: none;
+    right: 5%;
+    bottom: 5%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cancel-clue-main-icon{
+    height: 40px;
+    width: 40px;
+    box-shadow: 0 0 3px black;
+    border-radius: 50%;
+}
+
+
+
+#upload-thumbnail-button{
+    height: 15%;
+    width: 15%;
     margin: 2%;
     border: none;
     background: none;
@@ -41,27 +89,30 @@
     align-items: center;
 }
 
-.clue-main-thumbnail-button:hover{
+#upload-thumbnail-button:hover{
     box-shadow: 0 0 5px whitesmoke;
 }
 
-.clue-main-thumbnail-image{
+#upload-thumbnail-image{
     height: 90%;
 }
 
-.clue-main-thumbnail-row{
-    width: 100%;
-    height: 100%;
+#clue-main-upload-input{
+    cursor: pointer;
+    position: absolute;
+    bottom: 30%;
+    right: 20%
+}
+
+#clue-file-preview{
+    height: 23%;
     display: flex;
     justify-content: center;
-}
-
-#clue-thumbnail-top-row{
-    align-items: flex-end;
-}
-
-#clue-thumbnail-bottom-row{
-    align-items: flex-start;
+    align-items: center;
+    position: absolute;
+    bottom: 5%;
+    right: 44%;
+    box-shadow: 0 0 2px whitesmoke;
 }
 
 #clue-main-footer{

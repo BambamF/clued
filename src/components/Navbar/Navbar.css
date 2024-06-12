@@ -16,14 +16,23 @@
     margin-left: 17%;
 }
 
-#nav-profile-img{
-    height: 27px;
-    cursor: pointer;
-}
-
 #nav-search-profile-wrapper{
 display: flex;
 height: 100%;
 align-items: center;
 margin-right: 1%;
+}
+
+#notifications-icon{
+    height: 30px;
+    width: 30px;
+}
+
+#notifications-button{
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

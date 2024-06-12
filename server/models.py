@@ -1,8 +1,13 @@
 from config import db
 from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy.orm import relationship
+from datetime import datetime, timezone
+from sqlalchemy_utils import JSONType
 
 # structure for users in the app
 class User(db.Model):
+    __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
@@ -10,6 +15,8 @@ class User(db.Model):
     username = db.Column(db.String(30), unique=True, nullable=False)
     dob = db.Column(db.String(30), unique=False, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
+
+    clues = db.relationship('Clue', backref='user', lazy=True)
 
     def to_json(self):
         return {
@@ -28,3 +35,37 @@ class User(db.Model):
         self.password_hash = generate_password_hash(password)
 
 
+class Clue(db.Model):
+    __tablename__ = 'clues'
+
+    clue_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    collection_id = db.Column(db.Integer, nullable=True)
+
+    date_created = db.Column(db.Date, default=lambda: datetime.now(timezone.utc).date(), nullable=False)
+    time_created = db.Column(db.Time, default=lambda: datetime.now(timezone.utc).time(), nullable=False)
+    clue_title = db.Column(db.String(120), nullable=False)
+    clue_location = db.Column(db.String(255), nullable=True)
+    clue_notes = db.Column(db.Text, nullable=True)
+    clue_audio = db.Column(JSONType, nullable=True)  
+    clue_links = db.Column(JSONType, nullable=True)  
+    clue_main = db.Column(JSONType, nullable=False)  
+
+    def to_json(self):
+        return {
+            "clueId": self.clue_id,
+            "userId": self.user_id,
+            "collectionId": self.collection_id,
+            "dateCreated": self.date_created,
+            "timeCreated": self.time_created,
+            "clueTitle": self.clue_title,
+            "clueLocation": self.clue_location,
+            "clueNotes": self.clue_notes,
+            "clueAudio": self.clue_audio,
+            "clueLinks": self.clue_links,
+            "clueMain": self.clue_main,
+        }
+
+# Drop all tables and recreate them
+# db.drop_all()
+# db.create_all()

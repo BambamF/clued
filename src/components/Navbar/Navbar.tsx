@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import MenuButton from './MenuButton/MenuButton';
+import ProfileButton from './ProfileButton/ProfileButton';
 import SearchBar from './SearchBar/SearchBar';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 import { SignedInContext } from '../../Context';
-import userIcon from '../../public/assets/userIcon.png'
+import notificationsIcon from '../../public/assets/notificationsIcon.png';
 
 const Navbar = () => {
 
@@ -13,11 +13,11 @@ const Navbar = () => {
 
   return (
     <nav id='app-navbar'>
-        <MenuButton/>
+        <ProfileButton/>
         <Link to='/' id='header-link'><h3>Clued</h3></Link>
         <div id='nav-search-profile-wrapper'>
         <SearchBar/>
-        {signedIn ? <Link to="/sign-in" id='navbar-signin-link'><h5>sign in</h5></Link> : <div id='nav-profile-button'><img id='nav-profile-img' src={userIcon}/></div>}
+        <button id='notifications-button'><img id='notifications-icon' alt='notifications-icon' src={notificationsIcon}/></button>
         </div>
     </nav>
   )

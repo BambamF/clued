@@ -13,6 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 #clue-notes{
@@ -20,6 +21,24 @@
     width: 100%;
     border-radius: 10%;
     padding: 15px;
+}
+
+#clue-notes-save-button{
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: whitesmoke;
+    position: absolute;
+    border: none;
+    bottom: -5%;
+    right: -15%;
+}
+
+#clue-notes-save-button:hover{
+    border: solid 1px whitesmoke;
+    border-radius: 10px;
 }
 
 #clue-audio-div{
