@@ -6,7 +6,7 @@
     height: 8%;
     width: 100%;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-    position: fixed;
+    position: sticky;
 }
 
 
@@ -35,4 +35,27 @@ margin-right: 1%;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+#nav-sign-in-link{
+    margin-left: 2%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+#create-clue-button{
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#create-clue-icon{
+    height: 28px;
+    width: 28px;
 }

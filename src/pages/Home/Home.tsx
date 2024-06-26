@@ -1,12 +1,12 @@
 import React from 'react';
 import './Home.css';
-import Clue from '../../components/Clue/Clue';
+import CreateClue from '../../components/Clue/CreateClue';
 
 const Home = () => {
  
   return (
     <div id='home-wrapper'>
-      <Clue/>
+      <CreateClue/>
     </div>
   )
 }

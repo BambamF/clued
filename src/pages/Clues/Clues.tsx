@@ -3,7 +3,7 @@ import './Clues.css';
 
 const Clues = () => {
   return (
-    <div>Clues</div>
+    <div id='clues-wrapper'>Clues</div>
   )
 }
 

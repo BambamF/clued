@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from config import app, db
-from models import User
+from models import User, Clue
 from sqlalchemy.exc import IntegrityError
 import os
 
@@ -120,9 +120,28 @@ def delete_user(user_id):
         jsonify({"message": "User Deleted"}),
         200,
     )
+'''
+@app.route("/create-clue/<int:user_id>", methods=["POST"])
+def create_clue(user_id):
+
+    user = User.query.get(user_id)
+
+    if not user: 
+        return(
+            jsonify({"message": "User not found"}),
+            404,
+        )
+    data = request.get_json()
+
+    new_clue = Clue(user_id=user.id, collection_id=data.collectionId, date_created=data.dateCreated, time_created=data.timeCreated, clue_title=data.clueTitle, clue_location=data.clueLocation, clue_notes=data.clueNotes, clue_audio=data.clueAudio, clue_links=data.clueLinks, clue_main=data.clueMain, clue_main_type=data.clueMainType)
+
+
+'''
+
 
 # spin up the database
 if __name__ == "__main__":
     with app.app_context():
+       # db.drop_all()
         db.create_all()
     app.run(debug=True)

@@ -1,13 +1,29 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-type UsersContextType = {
-  users: string[];
-  setUsers: Dispatch<SetStateAction<string[]>>;
+type User = {
+ id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  dob: string;
+}
+
+type UserContextType = {
+  user: User | null;
+  setUser: Dispatch<React.SetStateAction<User | null>>;
 };
 
-export const UsersContext = createContext<UsersContextType>({
-  users: [],
-  setUsers: () => {},
+export const UserContext = createContext<UserContextType>({
+  user: {
+    id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  username: '',
+  dob: '',
+  },
+  setUser: () => {},
 });
 
 type SignInContextType = {
@@ -108,4 +124,38 @@ type ClueTimeContextType = {
 export const ClueTimeContext = createContext<ClueTimeContextType>({
   clueTime: "",
   setClueTime: () => {},
+});
+
+type Clue = {
+  id: number | null;
+  dateCreated: string;
+  timeCreated: string;
+  title: string;
+  location: string;
+  notes: string;
+  audio: string;
+  links: string;
+  main: string;
+  mainType: string;
+}
+
+type ClueContextType = {
+  clueData: Clue;
+  setClueData: Dispatch<SetStateAction<Clue>>;
+};
+
+export const ClueContext = createContext<ClueContextType>({
+  clueData: {
+    id: null,
+    dateCreated: '',
+    timeCreated: '',
+    title: '',
+    location: '',
+    notes: '',
+    audio: '',
+    links: '',
+    main: '',
+    mainType: ''
+  },
+  setClueData: () => {},
 });

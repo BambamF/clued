@@ -50,6 +50,7 @@ class Clue(db.Model):
     clue_audio = db.Column(JSONType, nullable=True)  
     clue_links = db.Column(JSONType, nullable=True)  
     clue_main = db.Column(JSONType, nullable=False)  
+    clue_main_type = db.Column(db.string(120), nullable=False)
 
     def to_json(self):
         return {
@@ -64,8 +65,5 @@ class Clue(db.Model):
             "clueAudio": self.clue_audio,
             "clueLinks": self.clue_links,
             "clueMain": self.clue_main,
+            "clueMainType": self.clue_main_type
         }
-
-# Drop all tables and recreate them
-# db.drop_all()
-# db.create_all()

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.css';
 import instagramIcon from '../../public/assets/instagramIcon.png';
 import tiktokIcon from '../../public/assets/tiktokIcon.png';
 import pinterestIcon from '../../public/assets/pinterestIcon.png';
 import showPasswordIcon from '../../public/assets/showPasswordIcon.png';
 import hidePasswordIcon from '../../public/assets/hidePasswordIcon.png';
-import { SignedInContext } from '../../Context';
+import { SignedInContext, UserContext } from '../../Context';
 import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -26,10 +26,13 @@ const schema = z.object({
 
 type FormFields = z.infer<typeof schema>;
 
+
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(true)
-    const {signedIn, setSignedIn} = useContext(SignedInContext)
+    const {setSignedIn} = useContext(SignedInContext)
+    const {setUser} = useContext(UserContext)
     const {register, handleSubmit, formState: {errors, isSubmitting}, setError} = useForm<FormFields>({resolver: zodResolver(schema)});
+    const navigate = useNavigate();
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
@@ -45,7 +48,16 @@ const SignIn = () => {
         })
         .then((response) => {
             console.log("Server Response:", response);
-            setSignedIn(true);
+            const userData = response.data.user;
+
+            // Check if the user data is valid
+            if (userData && typeof userData === 'object') {
+                setSignedIn(true);
+                setUser(userData);
+                navigate(`/user/${userData.id}`)
+            } else {
+                throw new Error("Invalid user data received from server");
+            }
         })
         .catch((error) => {
             if (error.response) {

@@ -6,7 +6,6 @@
     width: 40%;
     height: 100%;
     padding: 2%;
-    margin-top: 4%;
 }
 
 #clue-main-header{
@@ -38,6 +37,7 @@
     width: 65%;
     border-radius: 10%;
     box-shadow: 2px 3px 6px rgba(247, 246, 246, 0.644);
+    max-height: 95%;
 }
 #clue-file-uploaded-pdf{
     width: 90%;
