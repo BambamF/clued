@@ -7,7 +7,8 @@ import UserClueSupport from '../ClueSupport/UserClueSupport';
 import ClueEditbar from '../ClueEditbar/ClueEditbar';
 
 interface ClueProps {
-    id: number | null;
+    clueId: string;
+    userId: string;
     dateCreated: string;
     timeCreated: string;
     title: string;
@@ -16,14 +17,15 @@ interface ClueProps {
     audio: string;
     links: string;
     main: string;
-    mainType: string;
+    mainFileType: string
 }
 
-const UserClue: React.FC<ClueProps> = ({id, dateCreated, timeCreated, title, location, notes, audio, links, main, mainType}) => {
+const UserClue: React.FC<ClueProps> = ({clueId, userId, dateCreated, timeCreated, title, location, notes, audio, links, main, mainFileType}) => {
 
 const {user} = useContext(UserContext);
 const [clueData, setClueData] = useState<ClueProps>({
-    id: id,
+    clueId: clueId,
+    userId: userId,
     dateCreated: dateCreated,
     timeCreated: timeCreated,
     title: title,
@@ -32,7 +34,7 @@ const [clueData, setClueData] = useState<ClueProps>({
     audio: audio,
     links: links,
     main: main,
-    mainType: mainType
+    mainFileType: mainFileType
 })
 
 

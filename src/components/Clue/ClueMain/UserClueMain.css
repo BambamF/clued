@@ -1,0 +1,47 @@
+#user-clue-main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    padding: 2%;
+}
+
+#user-clue-main-header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+#user-clue-main-file{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#user-clue-file{
+    width: 65%;
+    border-radius: 10%;
+    box-shadow: 2px 3px 6px rgba(247, 246, 246, 0.644);
+    max-height: 95%;
+}
+#user-clue-file-pdf{
+    width: 90%;
+    height: 95%;
+    border-radius: 10%;
+    box-shadow: 2px 3px 6px rgba(247, 246, 246, 0.644);
+}
+
+#user-clue-main-footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}

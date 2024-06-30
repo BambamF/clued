@@ -2,7 +2,13 @@ from flask import request, jsonify
 from config import app, db
 from models import User, Clue
 from sqlalchemy.exc import IntegrityError
+from flask_cors import CORS
+from datetime import datetime, timezone
+from sqlalchemy.orm import Session
 import os
+
+# Enable CORS for the Flask app
+CORS(app)
 
 # route to get all users in the database
 @app.route("/users", methods=["GET"])
@@ -31,7 +37,6 @@ def sign_in():
         jsonify({"message": "User authenticated!", "user": user.to_json()}),
         200
     )
-    
 
 # route to add a new user to the database
 @app.route("/sign-up", methods=["POST"])
@@ -42,18 +47,18 @@ def sign_up():
     email = request.json.get("email")
     dob = request.json.get("dob")
     password = request.json.get("createPassword")
-    
+
     # handle missing user credentials
     if not first_name or not last_name or not username or not email or not dob or not password:
         return (
             jsonify({"message": "All fields are required"}), 
             400,
                 )
-    
+
     new_user = User(first_name=first_name, last_name=last_name, username=username, email=email, dob=dob)
     new_user.set_password(password)
 
-    #handle adding of the user to the database
+    # handle adding of the user to the database
     try:
         db.session.add(new_user)
         db.session.commit()
@@ -74,74 +79,93 @@ def sign_up():
 # route to update a users credentials
 @app.route("/update-user/<int:user_id>", methods=["PATCH"])
 def update_user(user_id):
+    with Session(db.engine) as session:
+        user = session.get(User, user_id)
 
-    user = User.query.get(user_id)
+        # handle user not found in database
+        if not user:
+            return (
+                jsonify({"message": "User not found"}),
+                404,
+            )
 
-    # handle user not found in database
-    if not user:
+        data = request.get_json()
+
+        user.first_name = data.get("firstName", user.first_name)
+        user.last_name = data.get("lastName", user.last_name)
+        user.username = data.get("username", user.username)
+        user.email = data.get("email", user.email)
+        user.dob = data.get("dob", user.dob)
+
+        session.commit()
+
         return (
-            jsonify({"message": "User not found"}),
-            404,
+            jsonify({"message": "User Updated", "user": user.to_json()}),
+            200,
         )
-    
-    data = request.get_json()
-
-    user.first_name = data.get("firstName", user.first_name)
-    user.last_name = data.get("lastName", user.last_name)
-    user.username = data.get("username", user.username)
-    user.email = data.get("email", user.email)
-    user.dob = data.get("dob", user.dob)
-
-    db.session.commit()
-
-    return (
-        jsonify({"message": "User Updated", "user": user.to_json()}),
-        200,
-    )
 
 # route to delete user from database
 @app.route("/delete-user/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
+    with Session(db.engine) as session:
+        user = session.get(User, user_id)
 
-    user = User.query.get(user_id)
+        # handle user not found in database
+        if not user:
+            return (
+                jsonify({"message": "User not found"}),
+                404,
+            )
 
-    # handle user not found in database
-    if not user:
+        # delete the user from the database
+        session.delete(user)
+        session.commit()
+
         return (
-            jsonify({"message": "User not found"}),
-            404,
+            jsonify({"message": "User Deleted"}),
+            200,
         )
 
-    # delete the user from the database
-    db.session.delete(user)
-    db.session.commit()
-
-    return (
-        jsonify({"message": "User Deleted"}),
-        200,
-    )
-'''
 @app.route("/create-clue/<int:user_id>", methods=["POST"])
 def create_clue(user_id):
+    with Session(db.engine) as session:
+        user = session.get(User, user_id)
 
-    user = User.query.get(user_id)
+        if not user: 
+            return(
+                jsonify({"message": "User not found"}),
+                404,
+            )
+        data = request.get_json()
 
-    if not user: 
-        return(
-            jsonify({"message": "User not found"}),
-            404,
+        new_clue = Clue(
+            user_id=data['userId'],
+            collection_id=data['collectionId'],
+            date_created=datetime.fromisoformat(data['dateCreated']).date(),
+            time_created=datetime.fromisoformat(data['timeCreated']).time(),
+            clue_title=data['clueTitle'],
+            clue_location=data['clueLocation'],
+            clue_notes=data['clueNotes'],
+            clue_audio=data['clueAudio'],
+            clue_links=data['clueLinks'],
+            clue_main=data['clueMain'],
+            clue_main_type=data['clueMainType']
         )
-    data = request.get_json()
 
-    new_clue = Clue(user_id=user.id, collection_id=data.collectionId, date_created=data.dateCreated, time_created=data.timeCreated, clue_title=data.clueTitle, clue_location=data.clueLocation, clue_notes=data.clueNotes, clue_audio=data.clueAudio, clue_links=data.clueLinks, clue_main=data.clueMain, clue_main_type=data.clueMainType)
-
-
-'''
-
+        try:
+            session.add(new_clue)
+            session.commit()
+            return (
+                jsonify({"message": "Clue created!", "clue": new_clue.to_json()}),
+                201,
+            )
+        except Exception as e:
+            session.rollback()
+            return jsonify({"message": str(e)}), 400
 
 # spin up the database
 if __name__ == "__main__":
     with app.app_context():
-       # db.drop_all()
+        # db.drop_all()
         db.create_all()
     app.run(debug=True)

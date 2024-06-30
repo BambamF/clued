@@ -47,18 +47,18 @@ class Clue(db.Model):
     clue_title = db.Column(db.String(120), nullable=False)
     clue_location = db.Column(db.String(255), nullable=True)
     clue_notes = db.Column(db.Text, nullable=True)
-    clue_audio = db.Column(JSONType, nullable=True)  
-    clue_links = db.Column(JSONType, nullable=True)  
-    clue_main = db.Column(JSONType, nullable=False)  
-    clue_main_type = db.Column(db.string(120), nullable=False)
+    clue_audio = db.Column(JSONType, nullable=True)
+    clue_links = db.Column(JSONType, nullable=True)
+    clue_main = db.Column(JSONType, nullable=False)
+    clue_main_type = db.Column(db.String(120), nullable=False)
 
     def to_json(self):
         return {
             "clueId": self.clue_id,
             "userId": self.user_id,
             "collectionId": self.collection_id,
-            "dateCreated": self.date_created,
-            "timeCreated": self.time_created,
+            "dateCreated": self.date_created.isoformat(),
+            "timeCreated": self.time_created.isoformat(),
             "clueTitle": self.clue_title,
             "clueLocation": self.clue_location,
             "clueNotes": self.clue_notes,

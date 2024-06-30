@@ -6,7 +6,7 @@ import ClueSupplement from './ClueSupplement/ClueSupplement';
 import ClueSupport from './ClueSupport/ClueSupport';
 import {TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueNotesContext, ClueDateContext, ClueTitleContext, ClueMainFileContext, ClueTimeContext} from '../../Context';
 
-const Clue = () => {
+const CreateClue = () => {
 
   const [textSupplementActive, setTextSupplementActive] = useState<boolean>(false);
   const [audioSupplementActive, setAudioSupplementActive] = useState<boolean>(false);
@@ -16,6 +16,7 @@ const Clue = () => {
   const [clueDate, setClueDate] = useState<Date>(new Date());
   const [clueTitle, setClueTitle] = useState<string>("");
   const [clueMainFile, setClueMainFile] = useState<string>("");
+  const [clueMainFileType, setClueMainFileType] = useState("");
   const [clueTime, setClueTime] = useState(clueDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
 
   return (
@@ -50,4 +51,4 @@ const Clue = () => {
   )
 }
 
-export default Clue
+export default CreateClue;

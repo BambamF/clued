@@ -39,4 +39,16 @@
     width: 35px;
 }
 
+#clue-editbar-save-button{
+    position: absolute;
+    right: 42%;
+    background: none;
+    color: whitesmoke;
+    cursor: pointer;
+    border: none;
+}
 
+#clue-editbar-save-button:hover{
+    border: solid 1px whitesmoke;
+    border-radius: 10px;
+}

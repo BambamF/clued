@@ -10,14 +10,12 @@ const UserClueMain = () => {
   return (
     <div id='user-clue-main-div'>
       <div id='user-clue-main-header'>
-        <div id='user-clue-main-header-date'></div>
-        <div id='user-clue-main-header-title'>
-
-        </div>
-        <div id='user-clue-main-header-time'></div>
+        <div id='user-clue-main-header-date'>{clueData.dateCreated}</div>
+        <div id='user-clue-main-header-title'>{clueData.title}</div>
+        <div id='user-clue-main-header-time'>{clueData.timeCreated}</div>
       </div>
       <div id='user-clue-main-file'>
-            {clueData.mainType == "image/jpeg" ?
+            {clueData.mainFileType == "image/jpeg" ?
                 <img src={clueData.main} id='user-clue-file' alt='user-clue-file-'/>
                 :
                 <iframe src={clueData.main} id='user-clue-file-pdf'/>

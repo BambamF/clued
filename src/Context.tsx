@@ -127,7 +127,8 @@ export const ClueTimeContext = createContext<ClueTimeContextType>({
 });
 
 type Clue = {
-  id: number | null;
+  clueId: string;
+  userId: string;
   dateCreated: string;
   timeCreated: string;
   title: string;
@@ -136,7 +137,7 @@ type Clue = {
   audio: string;
   links: string;
   main: string;
-  mainType: string;
+  mainFileType: string;
 }
 
 type ClueContextType = {
@@ -146,7 +147,8 @@ type ClueContextType = {
 
 export const ClueContext = createContext<ClueContextType>({
   clueData: {
-    id: null,
+    clueId: '',
+    userId: '',
     dateCreated: '',
     timeCreated: '',
     title: '',
@@ -155,7 +157,17 @@ export const ClueContext = createContext<ClueContextType>({
     audio: '',
     links: '',
     main: '',
-    mainType: ''
+    mainFileType: ''
   },
   setClueData: () => {},
+});
+
+type ClueRawFileContextType = {
+  rawFile: File | null;
+  setRawFile: Dispatch<SetStateAction<File | null>>;
+};
+
+export const ClueRawFileContext = createContext<ClueRawFileContextType>({
+  rawFile: null,
+  setRawFile: () => {},
 });

@@ -4,7 +4,9 @@ import addIcon from '../../../public/assets/addIcon.png';
 import audioIcon from '../../../public/assets/audioIcon.png';
 import textIcon from '../../../public/assets/textIcon.png';
 import linkIcon from '../../../public/assets/linkIcon.png';
-import { TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext } from '../../../Context';
+import { TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueMainFileContext, ClueTitleContext, ClueTimeContext, ClueDateContext, UserContext, ClueNotesContext, ClueRawFileContext } from '../../../Context';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const ClueEditbar = () => {
     const {textSupplementActive, setTextSupplementActive} = useContext(TextSupplementContext);
@@ -12,6 +14,15 @@ const ClueEditbar = () => {
     const {setSupplementActive} = useContext(SupplementContext);
     const {supportActive, setSupportActive} = useContext(SupportContext);
     const [addButtonHover, setAddButtonHover] = useState(false);
+    const {clueMainFile} = useContext(ClueMainFileContext);
+    const {clueTitle} = useContext(ClueTitleContext);
+    const {clueTime} = useContext(ClueTimeContext);
+    const {clueDate} = useContext(ClueDateContext);
+    const {user} = useContext(UserContext);
+    const {clueNotes} = useContext(ClueNotesContext);
+    const {rawFile} = useContext(ClueRawFileContext);
+    const navigate = useNavigate();
+    
 
     const handleAudioSupplementClick = () => {
       setSupplementActive(true);
@@ -35,6 +46,37 @@ const ClueEditbar = () => {
     const handleSupportClick = () => {
       setSupportActive(!supportActive);
     }
+    
+
+    const handleClueSave = async () => {
+
+      const data = {
+        userId: user?.id,
+        collectionId: null,
+        dateCreated: clueDate,
+        timeCreated: clueTime,
+        clueTitle: clueTitle,
+        clueLocation: 'location',
+        clueNotes: clueNotes,
+        clueAudio: 'audio',
+        clueLinks: null,
+        clueMain: clueMainFile,
+        clueMainType: rawFile?.type
+      }
+
+      if(clueMainFile && clueTitle){
+       await axios.post(`http://localhost:5000/create-clue/${user?.id}`, data, {
+        headers: {
+          'Content-Type': 'application/json'
+      }
+       })
+        .then((response)=> {
+          console.log(response)
+          navigate(`/clues/${user?.id}`)
+        })
+        .catch(e => console.log(e))
+      }
+    }
 
   return (
     <div id='clue-editbar-div'>
@@ -46,6 +88,7 @@ const ClueEditbar = () => {
           </div>
         }
         <button  id='add-button' onClick={handleAddButtonClick}><img onMouseOver={handleMouseOver} src={addIcon} alt='add-button-icon' id='add-button-icon' /></button>
+        {(clueMainFile && clueTitle) && <button id='clue-editbar-save-button' onClick={handleClueSave}>save clue</button>}
     </div>
   )
 }

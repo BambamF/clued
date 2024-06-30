@@ -2,7 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useContext, useState } from 'react';
 import './ClueMain.css';
 import uploadIcon from '../../../public/assets/uploadIcon.png';
 import cancelIcon from '../../../public/assets/cancelIcon.png';
-import { ClueDateContext, ClueMainFileContext, ClueTimeContext, ClueTitleContext } from '../../../Context';
+import { ClueDateContext, ClueMainFileContext, ClueTimeContext, ClueTitleContext, ClueRawFileContext } from '../../../Context';
 
 const ClueMain = () => {
 
@@ -44,7 +44,8 @@ const ClueMain = () => {
     }
 
   return (
-    <div id='clue-main-div'>
+    <ClueRawFileContext.Provider value={{rawFile, setRawFile}}>
+        <div id='clue-main-div'>
         <div id='clue-main-header'>
             <div id='clue-main-header-date'>{fullDate}</div>
             <div id='clue-main-header-title'>{
@@ -78,6 +79,8 @@ const ClueMain = () => {
             location
         </div>
     </div>
+    </ClueRawFileContext.Provider>
+    
   )
 }
 
