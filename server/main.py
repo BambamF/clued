@@ -171,6 +171,32 @@ def create_clue(user_id):
             session.rollback()
             return jsonify({"message": str(e)}), 400
 
+@app.route("/clues/<int:user_id>", methods=["GET"])
+def clues(user_id):
+    with Session(db.engine) as session:
+        user = session.get(User, user_id)
+
+        if not user:
+            return(
+                jsonify({"message": "User not found"}),
+                404,
+            )
+        clues = session.query(Clue).filter(Clue.user_id == user_id).all()
+
+        clues_list = [{"id": clue.id, 
+                       "clueTitle": clue.title, 
+                       "dateCreated": clue.date_created, 
+                       "timeCreated": clue.time_created,
+                       "collectionId": clue.collection_id,
+                       "clueLocation": clue.clue_location,
+                       "clueNotes": clue.clue_notes,
+                       "clueLinks": clue.clue_links,
+                       "clueAudio": clue.clue_audio,
+                       "clueMain": clue.clue_main,
+                       "clueMainType": clue.clue_main_type} for clue in clues]
+        
+        return jsonify(clues_list), 200
+
 # spin up the database
 if __name__ == "__main__":
     with app.app_context():
