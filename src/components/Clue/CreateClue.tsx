@@ -4,7 +4,7 @@ import ClueMain from './ClueMain/ClueMain';
 import ClueEditbar from './ClueEditbar/ClueEditbar';
 import ClueSupplement from './ClueSupplement/ClueSupplement';
 import ClueSupport from './ClueSupport/ClueSupport';
-import {TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueNotesContext, ClueDateContext, ClueTitleContext, ClueMainFileContext, ClueTimeContext} from '../../Context';
+import {TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueNotesContext, ClueDateContext, ClueTitleContext, ClueMainFileContext, ClueTimeContext, ClueRawFileContext, ClueRawFileTypeContext} from '../../Context';
 
 const CreateClue = () => {
 
@@ -18,6 +18,8 @@ const CreateClue = () => {
   const [clueMainFile, setClueMainFile] = useState<string>("");
   const [clueMainFileType, setClueMainFileType] = useState("");
   const [clueTime, setClueTime] = useState(clueDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
+  const [rawFile, setRawFile] = useState<File | null>(null);
+  const [rawFileType, setRawFileType] = useState('');
 
   return (
     <AudioSupplementContext.Provider value={{audioSupplementActive, setAudioSupplementActive}}>
@@ -29,14 +31,19 @@ const CreateClue = () => {
                 <ClueTitleContext.Provider value={{clueTitle, setClueTitle}}>
                   <ClueMainFileContext.Provider value={{clueMainFile, setClueMainFile}}>
                     <ClueTimeContext.Provider value={{clueTime, setClueTime}}>
-                    <div id='clue-wrapper'>
-                      <div id='clue-top-row'>
-                        <ClueMain/>
-                        <ClueSupplement/>
-                        <ClueSupport/>
-                      </div>
-                      <ClueEditbar/>
-                    </div>
+                      <ClueRawFileContext.Provider value={{rawFile, setRawFile}}>
+                        <ClueRawFileTypeContext.Provider value={{rawFileType, setRawFileType}}>
+                          <div id='clue-wrapper'>
+                            <div id='clue-top-row'>
+                              <ClueMain/>
+                              <ClueSupplement/>
+                              <ClueSupport/>
+                            </div>
+                            <ClueEditbar/>
+                          </div>
+                        </ClueRawFileTypeContext.Provider>
+                      </ClueRawFileContext.Provider>
+
                     </ClueTimeContext.Provider>
                   </ClueMainFileContext.Provider>
                 </ClueTitleContext.Provider>

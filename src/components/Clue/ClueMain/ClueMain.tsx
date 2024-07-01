@@ -2,7 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useContext, useState } from 'react';
 import './ClueMain.css';
 import uploadIcon from '../../../public/assets/uploadIcon.png';
 import cancelIcon from '../../../public/assets/cancelIcon.png';
-import { ClueDateContext, ClueMainFileContext, ClueTimeContext, ClueTitleContext, ClueRawFileContext } from '../../../Context';
+import { ClueDateContext, ClueMainFileContext, ClueTimeContext, ClueTitleContext, ClueRawFileContext, ClueRawFileTypeContext } from '../../../Context';
 
 const ClueMain = () => {
 
@@ -15,14 +15,18 @@ const ClueMain = () => {
     const fullDate = [clueDay, clueMonth+1, clueYear].join('/');
     const [location, setLocation] = useState<string | null>(null);
     const {clueMainFile, setClueMainFile} = useContext(ClueMainFileContext);
-    const [rawFile, setRawFile] = useState<File | null>(null);
     const [clueMainUploaded, setClueMainUploaded] = useState(false);
+    const {rawFile, setRawFile} = useContext(ClueRawFileContext)
+    const {rawFileType, setRawFileType} = useContext(ClueRawFileTypeContext);
 
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.files && e.target.files[0]){
-            setRawFile(e.target.files[0])
-            setClueMainFile(URL.createObjectURL(e.target.files[0]))
+            const file = e.target.files[0];
+            setRawFile(file);
+            setRawFileType(file.type); // Set rawFileType state
+            setClueMainFile(URL.createObjectURL(file)); // Set clueMainFile state
+            console.log(file);
         }
         console.log(e.target.files);
     }
@@ -35,6 +39,8 @@ const ClueMain = () => {
         setClueMainFile("");
         setClueMainUploaded(false);
         setClueTitle("");
+        setRawFile(null);
+        setRawFileType("");
     }
     
     const handleClueTitleUpload = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -44,8 +50,7 @@ const ClueMain = () => {
     }
 
   return (
-    <ClueRawFileContext.Provider value={{rawFile, setRawFile}}>
-        <div id='clue-main-div'>
+                    <div id='clue-main-div'>
         <div id='clue-main-header'>
             <div id='clue-main-header-date'>{fullDate}</div>
             <div id='clue-main-header-title'>{
@@ -79,7 +84,6 @@ const ClueMain = () => {
             location
         </div>
     </div>
-    </ClueRawFileContext.Provider>
     
   )
 }

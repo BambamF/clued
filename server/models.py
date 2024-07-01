@@ -41,9 +41,8 @@ class Clue(db.Model):
     clue_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     collection_id = db.Column(db.Integer, nullable=True)
-
-    date_created = db.Column(db.Date, default=lambda: datetime.now(timezone.utc).date(), nullable=False)
-    time_created = db.Column(db.Time, default=lambda: datetime.now(timezone.utc).time(), nullable=False)
+    date_created = db.Column(db.String(120), nullable=False)
+    time_created = db.Column(db.String(120), nullable=False)
     clue_title = db.Column(db.String(120), nullable=False)
     clue_location = db.Column(db.String(255), nullable=True)
     clue_notes = db.Column(db.Text, nullable=True)
@@ -57,8 +56,8 @@ class Clue(db.Model):
             "clueId": self.clue_id,
             "userId": self.user_id,
             "collectionId": self.collection_id,
-            "dateCreated": self.date_created.isoformat(),
-            "timeCreated": self.time_created.isoformat(),
+            "dateCreated": self.date_created,
+            "timeCreated": self.time_created,
             "clueTitle": self.clue_title,
             "clueLocation": self.clue_location,
             "clueNotes": self.clue_notes,

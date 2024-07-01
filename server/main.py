@@ -3,7 +3,7 @@ from config import app, db
 from models import User, Clue
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
-from datetime import datetime, timezone
+from datetime import datetime, time
 from sqlalchemy.orm import Session
 import os
 
@@ -137,35 +137,43 @@ def create_clue(user_id):
                 404,
             )
         data = request.get_json()
-
-        new_clue = Clue(
-            user_id=data['userId'],
-            collection_id=data['collectionId'],
-            date_created=datetime.fromisoformat(data['dateCreated']).date(),
-            time_created=datetime.fromisoformat(data['timeCreated']).time(),
-            clue_title=data['clueTitle'],
-            clue_location=data['clueLocation'],
-            clue_notes=data['clueNotes'],
-            clue_audio=data['clueAudio'],
-            clue_links=data['clueLinks'],
-            clue_main=data['clueMain'],
-            clue_main_type=data['clueMainType']
-        )
+        print('Received data:', data)
 
         try:
+            new_clue = Clue(
+                user_id=data['userId'],
+                collection_id=data.get('collectionId'),  # Using get to handle missing keys
+                date_created = data['dateCreated'],
+                time_created = data['timeCreated'],
+                clue_title=data['clueTitle'],
+                clue_location=data.get('clueLocation'),  # Using get to handle missing keys
+                clue_notes=data.get('clueNotes'),  # Using get to handle missing keys
+                clue_audio=data.get('clueAudio'),  # Using get to handle missing keys
+                clue_links=data.get('clueLinks'),  # Using get to handle missing keys
+                clue_main=data['clueMain'],
+                clue_main_type=data['clueMainType']
+            )
+             
             session.add(new_clue)
             session.commit()
             return (
                 jsonify({"message": "Clue created!", "clue": new_clue.to_json()}),
                 201,
             )
+        except KeyError as e:
+            print(f"KeyError: {e}")
+            return jsonify({"message": f"Missing key in request data: {str(e)}"}), 400
+        except ValueError as e:
+            print(f"ValueError: {e}")
+            return jsonify({"message": f"Invalid value in request data: {str(e)}"}), 400
         except Exception as e:
+            print(f"Exception: {e}")
             session.rollback()
             return jsonify({"message": str(e)}), 400
 
 # spin up the database
 if __name__ == "__main__":
     with app.app_context():
-        # db.drop_all()
+        #db.drop_all()
         db.create_all()
     app.run(debug=True)

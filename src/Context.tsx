@@ -171,3 +171,13 @@ export const ClueRawFileContext = createContext<ClueRawFileContextType>({
   rawFile: null,
   setRawFile: () => {},
 });
+
+type ClueRawFileTypeContextType = {
+  rawFileType: string
+  setRawFileType: Dispatch<SetStateAction<string>>;
+};
+
+export const ClueRawFileTypeContext = createContext<ClueRawFileTypeContextType>({
+  rawFileType: '',
+  setRawFileType: () => {},
+});

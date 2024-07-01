@@ -4,7 +4,7 @@ import addIcon from '../../../public/assets/addIcon.png';
 import audioIcon from '../../../public/assets/audioIcon.png';
 import textIcon from '../../../public/assets/textIcon.png';
 import linkIcon from '../../../public/assets/linkIcon.png';
-import { TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueMainFileContext, ClueTitleContext, ClueTimeContext, ClueDateContext, UserContext, ClueNotesContext, ClueRawFileContext } from '../../../Context';
+import { TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueMainFileContext, ClueTitleContext, ClueTimeContext, ClueDateContext, UserContext, ClueNotesContext, ClueRawFileContext, ClueRawFileTypeContext } from '../../../Context';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
@@ -22,7 +22,7 @@ const ClueEditbar = () => {
     const {clueNotes} = useContext(ClueNotesContext);
     const {rawFile} = useContext(ClueRawFileContext);
     const navigate = useNavigate();
-    
+    const {rawFileType} = useContext(ClueRawFileTypeContext);    
 
     const handleAudioSupplementClick = () => {
       setSupplementActive(true);
@@ -53,16 +53,18 @@ const ClueEditbar = () => {
       const data = {
         userId: user?.id,
         collectionId: null,
-        dateCreated: clueDate,
+        dateCreated: clueDate.toISOString(),
         timeCreated: clueTime,
         clueTitle: clueTitle,
         clueLocation: 'location',
-        clueNotes: clueNotes,
+        clueNotes: 'notes',
         clueAudio: 'audio',
         clueLinks: null,
-        clueMain: clueMainFile,
-        clueMainType: rawFile?.type
+        clueMain: rawFile,
+        clueMainType: rawFileType || "unknown"
       }
+
+      console.log('Payload:', data);
 
       if(clueMainFile && clueTitle){
        await axios.post(`http://localhost:5000/create-clue/${user?.id}`, data, {
