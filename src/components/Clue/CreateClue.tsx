@@ -4,7 +4,7 @@ import ClueMain from './ClueMain/ClueMain';
 import ClueEditbar from './ClueEditbar/ClueEditbar';
 import ClueSupplement from './ClueSupplement/ClueSupplement';
 import ClueSupport from './ClueSupport/ClueSupport';
-import {TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueNotesContext, ClueDateContext, ClueTitleContext, ClueMainFileContext, ClueTimeContext, ClueRawFileContext, ClueRawFileTypeContext} from '../../Context';
+import {TextSupplementContext, AudioSupplementContext, SupplementContext, SupportContext, ClueNotesContext, ClueDateContext, ClueTitleContext, ClueMainFileContext, ClueTimeContext, ClueRawFileContext, ClueRawFileTypeContext, FullDateContext} from '../../Context';
 
 const CreateClue = () => {
 
@@ -20,6 +20,7 @@ const CreateClue = () => {
   const [clueTime, setClueTime] = useState(clueDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
   const [rawFile, setRawFile] = useState<File | null>(null);
   const [rawFileType, setRawFileType] = useState('');
+  const [fullDate, setFullDate] = useState('');
 
   return (
     <AudioSupplementContext.Provider value={{audioSupplementActive, setAudioSupplementActive}}>
@@ -33,14 +34,17 @@ const CreateClue = () => {
                     <ClueTimeContext.Provider value={{clueTime, setClueTime}}>
                       <ClueRawFileContext.Provider value={{rawFile, setRawFile}}>
                         <ClueRawFileTypeContext.Provider value={{rawFileType, setRawFileType}}>
-                          <div id='clue-wrapper'>
+                          <FullDateContext.Provider value={{fullDate, setFullDate}}>
+                            <div id='clue-wrapper'>
                             <div id='clue-top-row'>
                               <ClueMain/>
                               <ClueSupplement/>
                               <ClueSupport/>
                             </div>
-                            <ClueEditbar/>
-                          </div>
+                            <ClueEditbar isUserClue={false}/>
+                            </div>
+                          </FullDateContext.Provider>
+
                         </ClueRawFileTypeContext.Provider>
                       </ClueRawFileContext.Provider>
 

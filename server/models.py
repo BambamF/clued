@@ -3,6 +3,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 from sqlalchemy_utils import JSONType
+import base64
 
 # structure for users in the app
 class User(db.Model):
@@ -48,7 +49,7 @@ class Clue(db.Model):
     clue_notes = db.Column(db.Text, nullable=True)
     clue_audio = db.Column(JSONType, nullable=True)
     clue_links = db.Column(JSONType, nullable=True)
-    clue_main = db.Column(JSONType, nullable=False)
+    clue_main = db.Column(db.LargeBinary, nullable=False)
     clue_main_type = db.Column(db.String(120), nullable=False)
 
     def to_json(self):
@@ -58,11 +59,11 @@ class Clue(db.Model):
             "collectionId": self.collection_id,
             "dateCreated": self.date_created,
             "timeCreated": self.time_created,
-            "clueTitle": self.clue_title,
+            "userClueTitle": self.clue_title,
             "clueLocation": self.clue_location,
-            "clueNotes": self.clue_notes,
+            "userClueNotes": self.clue_notes,
             "clueAudio": self.clue_audio,
             "clueLinks": self.clue_links,
-            "clueMain": self.clue_main,
+            'clueMain': base64.b64encode(self.clue_main).decode('utf-8') if self.clue_main else None,
             "clueMainType": self.clue_main_type
         }

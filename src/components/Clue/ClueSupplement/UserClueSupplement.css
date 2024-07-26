@@ -18,3 +18,43 @@
     margin-bottom: -30%;
     background-color: rgb(23, 23, 23);
 }
+
+#clue-notes-text-wrapper{
+    height: 100%;
+    width: 100%;
+    border-radius: 40px;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clue-notes-text-higherWrapper{
+    height: auto;
+    max-height: 50%;
+    width: auto;
+    max-width: 65%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clue-notes-text{
+    height: auto;
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    word-wrap: break-word;
+}
+
+
+#clue-notes-text-wrapper:hover{
+    border: 1px solid whitesmoke;
+}
+

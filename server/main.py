@@ -1,10 +1,11 @@
-from flask import request, jsonify
+from flask import request, Response, jsonify
 from config import app, db
 from models import User, Clue
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from datetime import datetime, time
 from sqlalchemy.orm import Session
+from werkzeug.utils import secure_filename
 import os
 
 # Enable CORS for the Flask app
@@ -136,8 +137,16 @@ def create_clue(user_id):
                 jsonify({"message": "User not found"}),
                 404,
             )
-        data = request.get_json()
+        data = request.form
         print('Received data:', data)
+
+        file = request.files['clueMain']
+
+        if not file:
+            return 'No file uploaded!', 400
+        
+        mimetype = file.mimetype
+
 
         try:
             new_clue = Clue(
@@ -145,14 +154,16 @@ def create_clue(user_id):
                 collection_id=data.get('collectionId'),  # Using get to handle missing keys
                 date_created = data['dateCreated'],
                 time_created = data['timeCreated'],
-                clue_title=data['clueTitle'],
+                clue_title=data['userClueTitle'],
                 clue_location=data.get('clueLocation'),  # Using get to handle missing keys
-                clue_notes=data.get('clueNotes'),  # Using get to handle missing keys
+                clue_notes=data.get('userClueNotes'),  # Using get to handle missing keys
                 clue_audio=data.get('clueAudio'),  # Using get to handle missing keys
                 clue_links=data.get('clueLinks'),  # Using get to handle missing keys
-                clue_main=data['clueMain'],
-                clue_main_type=data['clueMainType']
+                clue_main=file.read(),
+                clue_main_type=mimetype
             )
+
+            
              
             session.add(new_clue)
             session.commit()
@@ -181,21 +192,65 @@ def clues(user_id):
                 jsonify({"message": "User not found"}),
                 404,
             )
-        clues = session.query(Clue).filter(Clue.user_id == user_id).all()
+        clues = Clue.query.filter_by(user_id=user_id).all()
 
-        clues_list = [{"id": clue.id, 
-                       "clueTitle": clue.title, 
-                       "dateCreated": clue.date_created, 
-                       "timeCreated": clue.time_created,
-                       "collectionId": clue.collection_id,
-                       "clueLocation": clue.clue_location,
-                       "clueNotes": clue.clue_notes,
-                       "clueLinks": clue.clue_links,
-                       "clueAudio": clue.clue_audio,
-                       "clueMain": clue.clue_main,
-                       "clueMainType": clue.clue_main_type} for clue in clues]
+        clues_list = [clue.to_json() for clue in clues]
         
         return jsonify(clues_list), 200
+    
+@app.route('/get-clue-main/<int:clue_id>', methods=["GET"])
+def get_clue_main(clue_id):
+    with Session(db.engine) as session:
+        clue = session.get(Clue, clue_id)
+
+        if not clue:
+            return jsonify({"message": "Clue not found"}), 404
+        
+        return (
+            clue.clue_main,
+            200,
+            {
+                "Content-Type": clue.clue_main_type,
+                "Content-Disposition": f"attachment; filename={clue.clue_id}"
+            }
+        )
+
+@app.route('/update-clue/<int:clue_id>', methods=["PUT"])
+def update_clue(clue_id):
+    with Session(db.engine) as session:
+        clue = session.get(Clue, clue_id)
+
+        if not clue:
+            return jsonify({"message": "Clue not found"}), 404     
+
+
+
+        try:
+
+            data = request.form.to_dict()
+
+            file = request.files.get('clueMain')
+
+            if not file:
+                return 'No file uploaded!', 400
+        
+            mimetype = file.mimetype
+
+            clue.collection_id = data.get('collectionId', clue.collection_id)
+            clue.clue_title = data.get('userClueTitle', clue.clue_title)
+            clue.clue_notes = data.get('userClueNotes', clue.clue_notes)
+            clue.clue_audio = data.get('clueAudio', clue.clue_audio)
+            clue.clue_links = data.get('clueLinks', clue.clue_links)
+            clue.clue_main = file.read()
+            clue.clue_main_type = mimetype
+
+            session.commit()
+            return jsonify({"message": "Clue updated successfully"}, clue.to_json()), 200
+
+        except Exception as e:
+            print(f"Exception: {e}")
+            session.rollback()
+            return jsonify({"message": str(e)}), 400            
 
 # spin up the database
 if __name__ == "__main__":

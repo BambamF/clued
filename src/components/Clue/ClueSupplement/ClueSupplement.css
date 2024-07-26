@@ -33,7 +33,28 @@
     position: absolute;
     border: none;
     bottom: -5%;
-    right: -15%;
+    right: -18%;
+}
+
+#clue-notes-clear-button{
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: whitesmoke;
+    position: absolute;
+    border: none;
+    bottom: -5%;
+    right: -25%;
+}
+
+#clue-notes-clear-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15px;
+    width: 15px;
 }
 
 #clue-notes-save-button:hover{

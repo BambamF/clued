@@ -96,6 +96,16 @@ export const ClueDateContext = createContext<ClueDateContextType>({
   setClueDate: () => {},
 });
 
+type FullDateContextType = {
+  fullDate: string;
+  setFullDate: Dispatch<SetStateAction<string>>;
+};
+
+export const FullDateContext = createContext<FullDateContextType>({
+  fullDate: "",
+  setFullDate: () => {},
+});
+
 type ClueTitleContextType = {
   clueTitle: string;
   setClueTitle: Dispatch<SetStateAction<string>>;
@@ -127,17 +137,17 @@ export const ClueTimeContext = createContext<ClueTimeContextType>({
 });
 
 type Clue = {
-  clueId: string;
+  id: string;
   userId: string;
   dateCreated: string;
   timeCreated: string;
-  title: string;
-  location: string;
-  notes: string;
-  audio: string;
-  links: string;
-  main: string;
-  mainFileType: string;
+  userClueTitle: string;
+  clueLocation: string;
+  userClueNotes: string;
+  clueAudio: string;
+  clueLinks: string;
+  clueMain: string;
+  clueMainType: string
 }
 
 type ClueContextType = {
@@ -147,17 +157,17 @@ type ClueContextType = {
 
 export const ClueContext = createContext<ClueContextType>({
   clueData: {
-    clueId: '',
+    id: '',
     userId: '',
     dateCreated: '',
     timeCreated: '',
-    title: '',
-    location: '',
-    notes: '',
-    audio: '',
-    links: '',
-    main: '',
-    mainFileType: ''
+    userClueTitle: '',
+    clueLocation: '',
+    userClueNotes: '',
+    clueAudio: '',
+    clueLinks: '',
+    clueMain: '',
+    clueMainType: ''
   },
   setClueData: () => {},
 });
@@ -181,3 +191,13 @@ export const ClueRawFileTypeContext = createContext<ClueRawFileTypeContextType>(
   rawFileType: '',
   setRawFileType: () => {},
 });
+
+type EditClueContextType = {
+  editClue: boolean
+  setEditClue: Dispatch<SetStateAction<boolean>>;
+};
+
+export const EditClueContext = createContext<EditClueContextType>({
+  editClue: false,
+  setEditClue: () => {},
+})

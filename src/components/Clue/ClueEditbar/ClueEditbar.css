@@ -1,6 +1,5 @@
 #clue-editbar-div{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -11,6 +10,7 @@
 #add-button{
     background: none;
     border: none;
+    position: relative; 
 }
 
 #add-button-icon{
@@ -18,7 +18,6 @@
     height: 50px;
     background: none;
     cursor: pointer;
-    position: relative; 
 }
 
 .text-audio-options{
@@ -48,7 +47,21 @@
     border: none;
 }
 
+#clue-editbar-save-button2{
+    position: absolute;
+    right: 42%;
+    background: none;
+    color: whitesmoke;
+    cursor: pointer;
+    border: none;
+}
+
 #clue-editbar-save-button:hover{
+    border: solid 1px whitesmoke;
+    border-radius: 10px;
+}
+
+#clue-editbar-save-button2:hover{
     border: solid 1px whitesmoke;
     border-radius: 10px;
 }

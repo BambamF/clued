@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 #create the flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 #config for the flask app
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///mydatabase.db"
