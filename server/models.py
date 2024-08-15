@@ -12,12 +12,13 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    username = db.Column(db.String(30), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False, index=True)
+    username = db.Column(db.String(30), unique=True, nullable=False, index=True)
     dob = db.Column(db.String(30), unique=False, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
 
     clues = db.relationship('Clue', backref='user', lazy=True)
+    profile = db.relationship('Profile', backref='user', uselist=False)
 
     def to_json(self):
         return {
@@ -67,3 +68,21 @@ class Clue(db.Model):
             'clueMain': base64.b64encode(self.clue_main).decode('utf-8') if self.clue_main else None,
             "clueMainType": self.clue_main_type
         }
+
+class Profile(db.Model):
+    __tablename__ = "profile"
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
+    profile_id = db.Column(db.Integer, primary_key=True)
+    screenname = db.Column(db.String(120), nullable=True)
+    user_interests = db.Column(JSONType, nullable=True)
+    profile_image = db.Column(db.LargeBinary, nullable=True)
+
+    def to_json(self):
+        return {
+            "userId": self.user_id,
+            "screenName": self.screenname,
+            "userInterests": self.user_interests,
+            "profileImage": base64.b64encode(self.profile_image).decode('utf-8') if self.profile_image else None
+        }
+    

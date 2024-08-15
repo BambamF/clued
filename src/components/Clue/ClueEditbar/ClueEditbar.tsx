@@ -11,7 +11,7 @@ import editIcon from '../../../public/assets/editIcon.png';
 
 
 
-const ClueEditbar: React.FC<{isUserClue: boolean}> = ({isUserClue}) => {
+const ClueEditbar: React.FC<{isUserClue: boolean, isCreateClue: boolean}> = ({isUserClue, isCreateClue}) => {
     const {textSupplementActive, setTextSupplementActive} = useContext(TextSupplementContext);
     const {audioSupplementActive, setAudioSupplementActive} = useContext(AudioSupplementContext);
     const {setSupplementActive} = useContext(SupplementContext);
@@ -58,13 +58,13 @@ const ClueEditbar: React.FC<{isUserClue: boolean}> = ({isUserClue}) => {
 
       if (clueMainFile && clueTitle && rawFile) {
         const formData = new FormData();
-        formData.append('userId', user?.id || '');
+        formData.append('userId', user?.id ? user.id.toString() : '');
         formData.append('collectionId', '');
         formData.append('dateCreated', fullDate);
         formData.append('timeCreated', clueTime || '');
-        formData.append('userClueTitle', clueData.userClueTitle || '');
+        formData.append('userClueTitle', clueTitle || '');
         formData.append('clueLocation', 'location');
-        formData.append('userClueNotes', clueData.userClueNotes || '');
+        formData.append('userClueNotes', clueNotes || '');
         formData.append('clueAudio', 'audio');
         formData.append('clueLinks', '');
         formData.append('clueMain', rawFile); // Append the actual file object
@@ -98,7 +98,7 @@ const ClueEditbar: React.FC<{isUserClue: boolean}> = ({isUserClue}) => {
 
       const formData = new FormData();
 
-      formData.append('userId', user?.id || '');
+      formData.append('userId', user?.id ? user.id.toString() : '');
       formData.append('collectionId', '');
       formData.append('dateCreated', clueData.dateCreated);
       formData.append('timeCreated', clueData.timeCreated || '');
@@ -149,7 +149,7 @@ const ClueEditbar: React.FC<{isUserClue: boolean}> = ({isUserClue}) => {
 
   return (
     <div id='clue-editbar-div'>
-        {(addButtonHover && editClue) && 
+        {((addButtonHover && isCreateClue) || (addButtonHover && editClue)) && 
           <div id='add-text-audio-options'>
             <button id='add-text-button' onClick={handleTextSupplementClick} className='text-audio-options'><img src={textIcon} className='text-audio-icon'/></button>
             <button id='add-audio-button' onClick={handleAudioSupplementClick} className='text-audio-options'><img src={audioIcon} className='text-audio-icon'/></button>

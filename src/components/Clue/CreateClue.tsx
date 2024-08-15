@@ -41,7 +41,7 @@ const CreateClue = () => {
                               <ClueSupplement/>
                               <ClueSupport/>
                             </div>
-                            <ClueEditbar isUserClue={false}/>
+                            <ClueEditbar isUserClue={false} isCreateClue={true}/>
                             </div>
                           </FullDateContext.Provider>
 

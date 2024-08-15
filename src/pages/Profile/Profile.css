@@ -1,0 +1,270 @@
+#profile-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 100%;
+}
+
+#profile-banner{
+    display: flex;
+    align-items: center;
+    height: 30%;
+    width: 85%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+#profile-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#profile-image-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 50%;
+    width: 10%;
+    max-width: 11%;
+    margin-right: 1%;
+    overflow: hidden;
+}
+
+#profile-image-div2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 50%;
+    width: 10%;
+    max-width: 11%;
+    margin-right: 1%;
+    overflow: hidden;
+    border: 1px solid whitesmoke;
+}
+
+
+#profile-image-input{
+    height: 100%;
+    cursor: pointer;
+}
+
+#profile-image2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#profile-image-input-div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#profile-input-label{
+    cursor: pointer;
+}
+
+#profile-image-input-div>input {
+    display: none;
+    cursor: pointer;
+  }
+
+#profile-name-div{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    height: 60%;
+    width: 50%;
+}
+
+#profile-screen-input{
+    width: 60%;
+    height: 15%;
+    display: flex;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    border-radius: 20px;
+}
+
+#profile-screen-name{
+    display: flex;
+}
+
+#edit-profile-button{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    height: 20%;
+    bottom: 5%;
+    left: 15%;
+    cursor: pointer;
+}
+
+#edit-profile-image{
+    height: 100%;
+    width: 100%;
+}
+
+#clues-analytics{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+#profile-interests-div{
+    height: 90%;
+    width: 85%;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#interests-choice-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 100%;
+    padding: 2%;
+}
+
+.interest-choice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    color: whitesmoke;
+    width: 15%;
+    height: 30%;
+    border-radius: 20%;
+    cursor: pointer;
+    margin: 5%;
+}
+
+.interest-button{
+    background: none;
+    height: 10%;
+    width: 4%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.interest-icon{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#interest-sub-choice-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#interest-sub-choices{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+
+#interest-media-display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+}
+
+#interest-media-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 80%;
+    border: none;
+    border-radius: 10%;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px rgba(247, 246, 246, 0.644);
+}
+
+#interest-sub-banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    width: 100%;
+}
+
+#interest-sub-header{
+    margin: 3%;
+    background: none;
+    border-radius: 20%;
+    color: whitesmoke;
+    height: 30%;
+    width: 15%;
+    cursor: pointer;
+}
+
+#selected-sub-header{
+    color: greenyellow;
+}
+
+.selected-sub-header{
+    color: greenyellow;
+}
+
+#interest-sub-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.sub-interest{
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    height: 70%;
+    width: 60%;
+    background: none;
+    color: whitesmoke;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+#interest-media-image{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

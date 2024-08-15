@@ -58,7 +58,7 @@ import ClueEditbar from '../ClueEditbar/ClueEditbar';
                                     {userClueNotes && <UserClueSupplement/>}
                                     <UserClueSupport/>
                                 </div>
-                                <ClueEditbar isUserClue={true}/> 
+                                <ClueEditbar isUserClue={true} isCreateClue={false}/> 
                             </div>     
                                                        
                         </ClueNotesContext.Provider>

@@ -1,12 +1,13 @@
-from flask import request, Response, jsonify
+from flask import request, Response, jsonify, send_file
 from config import app, db
-from models import User, Clue
+from models import User, Clue, Profile
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from datetime import datetime, time
 from sqlalchemy.orm import Session
 from werkzeug.utils import secure_filename
 import os
+from io import BytesIO
 
 # Enable CORS for the Flask app
 CORS(app)
@@ -251,6 +252,120 @@ def update_clue(clue_id):
             print(f"Exception: {e}")
             session.rollback()
             return jsonify({"message": str(e)}), 400            
+
+
+@app.route('/profile/<int:user_id>', methods=["GET"])
+def get_profile(user_id):
+    with Session(db.engine) as session:
+        profile = session.get(Profile, user_id)
+        user = session.get(User, user_id)
+
+        if not profile:
+            return jsonify({"message": "No profile found!"}, 404)
+        
+        if not user:
+            return jsonify({"message": "User not found!"}, 404)
+            
+        
+        return (
+            profile.to_json(),
+            200
+        )
+    
+@app.route('/get-profile-pic/<int:user_id>', methods=["GET"])
+def get_profile_pic(user_id):
+    with Session(db.engine) as session:
+        
+        profile = session.get(Profile, user_id)
+
+        if not profile: 
+            return jsonify({"message": "No profile found!"}), 404
+        
+        if not profile.profile_image:
+            return jsonify({"message": "No profile image found!"}), 404
+        
+        image = BytesIO(profile.profile_image)
+        return send_file(
+            image,
+            mimetype='image/jpeg',  # Adjust MIME type if necessary
+            as_attachment=False,
+            download_name=f"profile_pic_{user_id}.jpg"
+        )
+
+        
+
+@app.route('/update-profile/<int:user_id>', methods=["PUT"])
+def update_profile(user_id):
+    with Session(db.engine) as session:
+
+        profile = session.get(Profile, user_id)
+
+        user = session.get(User, user_id)
+
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+        data = request.form.to_dict()
+
+        file = request.files.get("profileImage")
+
+
+        if not profile:
+
+            try:
+                profile = Profile(
+                    user_id=user.id,
+                    screenname=data.get("screenName"),
+                    user_interests=data.get("userInterests"),
+                    profile_image=file.read() if file else None
+                )
+
+                session.add(profile)
+                session.commit()
+                return jsonify({
+                    "message": "Profile created successfully",
+                    "profile": profile.to_json()
+                    }), 201
+            
+            except Exception as e:
+                print(f"Exception: {e}")
+                session.rollback()
+                return jsonify({"message": str(e)}), 400   
+
+        else:
+            try:
+                profile.screenname = data.get('screenName', profile.screenname)
+
+                if file:
+                    profile.profile_image = file.read()
+
+                profile.user_interests = data.get('userInterests', profile.user_interests)
+
+                session.commit()
+                return jsonify({
+                    "message": "Profile updated successfully",
+                        "profile": profile.to_json()
+                        }), 200
+            except Exception as e:
+                print(f"Exception: {e}")
+                session.rollback()
+                return jsonify({"message": "Failed to update profile", "error": str(e)}), 400
+
+@app.route('/get-user-interests/<int:user_id>', methods=["GET"])
+def get_user_interests(user_id):
+    with Session(db.engine) as session:
+
+        profile = session.get(Profile, user_id)
+
+        if not profile:
+            return jsonify({"message": "User Profile not found!"}), 404
+
+        data = profile.user_interests
+
+        return (
+            data,
+            200
+        )
 
 # spin up the database
 if __name__ == "__main__":

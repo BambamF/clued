@@ -15,7 +15,7 @@ import ProtectedRoute from './pages/ProtectedRoute/ProtectedRoute';
 function App() {
 
   type User = {
-    id: string;
+    id: number | null;
      firstName: string;
      lastName: string;
      email: string;

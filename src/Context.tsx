@@ -1,7 +1,7 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 type User = {
- id: string;
+ id: number | null;
   firstName: string;
   lastName: string;
   email: string;
@@ -16,7 +16,7 @@ type UserContextType = {
 
 export const UserContext = createContext<UserContextType>({
   user: {
-    id: '',
+    id: null,
   firstName: '',
   lastName: '',
   email: '',
@@ -183,7 +183,7 @@ export const ClueRawFileContext = createContext<ClueRawFileContextType>({
 });
 
 type ClueRawFileTypeContextType = {
-  rawFileType: string
+  rawFileType: string;
   setRawFileType: Dispatch<SetStateAction<string>>;
 };
 
@@ -193,11 +193,101 @@ export const ClueRawFileTypeContext = createContext<ClueRawFileTypeContextType>(
 });
 
 type EditClueContextType = {
-  editClue: boolean
+  editClue: boolean;
   setEditClue: Dispatch<SetStateAction<boolean>>;
 };
 
 export const EditClueContext = createContext<EditClueContextType>({
   editClue: false,
   setEditClue: () => {},
-})
+});
+
+type InterestChoicesType = {
+  interest: string | null;
+  subInterests: string[] | null;
+}
+
+type InterestChoiceContextType = {
+  interestChoice: InterestChoicesType;
+  setInterestChoice: Dispatch<SetStateAction<InterestChoicesType>>;
+};
+
+export const InterestChoiceContext = createContext<InterestChoiceContextType>({
+  interestChoice: {
+    interest: null,
+    subInterests: null
+  },
+  setInterestChoice: () => {},
+});
+
+type InterestIndexContextType = {
+  interestIndex: number;
+  setInterestIndex: Dispatch<SetStateAction<number>>;
+};
+
+export const InterestIndexContext = createContext<InterestIndexContextType>({
+  interestIndex: 0,
+  setInterestIndex: () => {},
+});
+
+type FinalInterestsContextType = {
+  finalInterests: InterestChoicesType[];
+  setFinalInterests: Dispatch<SetStateAction<InterestChoicesType[]>>;
+};
+
+export const FinalInterestsContext = createContext<FinalInterestsContextType>({
+  finalInterests: [],
+  setFinalInterests: () => {},
+});
+
+type UserInterests = {
+  interest: string | null;
+  subInterests: string[] | null;
+};
+
+type UserProfileType = {
+  userId: number | null;
+  screenName: string | null;
+  userInterests: UserInterests[] | null;
+  profileImage: File | null;
+};
+
+type UserProfileContextType = {
+  profileData: UserProfileType | null;
+  setProfileData: Dispatch<SetStateAction<UserProfileType | null>>;
+};
+
+export const UserProfileContext = createContext<UserProfileContextType>({
+  profileData: {
+    userId: null,
+    screenName: '',
+    userInterests: [
+      {
+      interest: null,
+      subInterests: null
+    },
+  ],
+  profileImage: null
+  },
+  setProfileData: () => {},
+});
+
+type InitialProfileContextType = {
+  initialProfileData: UserProfileType | null;
+  setInitialProfileData: Dispatch<SetStateAction<UserProfileType | null>>;
+};
+
+export const InitialProfileContext = createContext<InitialProfileContextType>({
+  initialProfileData: {
+    userId: null,
+    screenName: '',
+    userInterests: [
+      {
+      interest: null,
+      subInterests: null
+    },
+  ],
+  profileImage: null
+  },
+  setInitialProfileData: () => {},
+});
