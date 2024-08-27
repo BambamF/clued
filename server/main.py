@@ -1,4 +1,4 @@
-from flask import request, Response, jsonify, send_file
+from flask import request, Response, jsonify, send_file, send_from_directory
 from config import app, db
 from models import User, Clue, Profile
 from sqlalchemy.exc import IntegrityError
@@ -11,6 +11,17 @@ from io import BytesIO
 
 # Enable CORS for the Flask app
 CORS(app)
+
+frontend_folder = os.path.join(os.getcwd(),"..","src")
+dist_folder = os.path.join(os.getcwd(), "..", "dist")
+
+# serve static files from the dist folder under the frontend directory
+@app.route("/", defaults={"filename":""})
+@app.route("/<path:filename>")
+def index(filename):
+    if not filename:
+        filename = "index.html"
+    return send_from_directory(dist_folder, filename)
 
 # route to get all users in the database
 @app.route("/users", methods=["GET"])
