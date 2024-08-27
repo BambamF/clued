@@ -13,7 +13,7 @@ const ProfileButton = () => {
   return (
     <div id='profile-button-wrapper'>
       <button id='nav-profile-button' onClick={handleProfileClick}><img id='nav-profile-img' alt='nav-profile-img' src={userIcon}/></button>
-      {menuClicked && <MenuBox/>}
+      {menuClicked && <MenuBox setMenuClicked={setMenuClicked}/>}
     </div>
     
     

@@ -7,7 +7,9 @@
     width: 100%;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     position: sticky;
+    background-color: rgb(15, 15, 15);
     top: 0;
+    z-index: 2;
 }
 
 

@@ -3,7 +3,13 @@ import './Settings.css';
 
 const Settings = () => {
   return (
-    <div>Settings</div>
+    <div id='settings-wrapper'>
+      <div id='settings-box'>
+        <div id=''>
+          
+        </div>
+      </div>
+    </div>
   )
 }
 

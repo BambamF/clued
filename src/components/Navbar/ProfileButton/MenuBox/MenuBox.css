@@ -1,6 +1,6 @@
 #menu-box{
     position: absolute;
-    background-color: transparent;
+    background-color: rgb(15, 15, 15);
     width: 200px;
     height: 200px;
     display: flex;

@@ -11,16 +11,19 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    position: sticky;
+    top: 7%;
+    background-color: rgb(15, 15, 15);
+    z-index: 1;
 }
 
-.clues-header-tab{
+#clues-header-tab{
     background: none;
     color: whitesmoke;
     border-radius: 10px 10px 0 0;
     height: 60%;
     width: 9%;
     cursor: pointer;
-    position: sticky;
 }
 
 #clues-feeds{
@@ -30,5 +33,10 @@
     flex-grow: 1;
     width: 100%;
     overflow-y: auto;
-    height: calc(100% - 50px);
+    height: 95%;
+    margin-top: 115px;
+    top: 0;
+    position: absolute;
+    justify-self: flex-end;
+    z-index: 0;
 }

@@ -20,8 +20,8 @@ const Clues = () => {
   return (
     <div id='clues-wrapper'>
       <div id='clues-header-tabs'>
-        <button id='my-clues-tab' className='clues-header-tab' onClick={handleCluesView}>my clues</button>
-        <button id='feed-clues-tab' className='clues-header-tab' onClick={handleFeedView}>feed</button>
+        <button id='clues-header-tab' className='clues-header-tab' onClick={handleCluesView}>my clues</button>
+        <button id='clues-header-tab' className='clues-header-tab' onClick={handleFeedView}>feed</button>
       </div>
       <div id='clues-feeds'>
         {feedView ?

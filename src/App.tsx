@@ -58,13 +58,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route 
+{
+/*            <Route 
               path='settings/:id' element={
                 <ProtectedRoute>
                   <Settings />
                 </ProtectedRoute>
               }
             />
+*/            
+            }
             <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>

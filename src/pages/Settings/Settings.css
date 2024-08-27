@@ -1,0 +1,17 @@
+#settings-wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#settings-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 60%;
+    background-color: rgb(195, 194, 194);
+    border-radius: 30px;
+}
