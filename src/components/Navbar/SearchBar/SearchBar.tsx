@@ -1,4 +1,4 @@
-import React from 'react';
+
 import searchButton from '../../../public/assets/searchButton.png';
 import './SearchBar.css';
 

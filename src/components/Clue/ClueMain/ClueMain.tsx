@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useContext, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useContext, useState } from 'react';
 import './ClueMain.css';
 import uploadIcon from '../../../public/assets/uploadIcon.png';
 import cancelIcon from '../../../public/assets/cancelIcon.png';

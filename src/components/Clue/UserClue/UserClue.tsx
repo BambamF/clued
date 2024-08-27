@@ -1,4 +1,4 @@
-import { ClueContext, ClueNotesContext, ClueRawFileContext, ClueRawFileTypeContext, ClueTitleContext, EditClueContext, UserContext } from '../../../Context';
+import { ClueContext, ClueNotesContext, ClueRawFileContext, ClueRawFileTypeContext, ClueTitleContext, EditClueContext } from '../../../Context';
 import React, { useContext, useState } from 'react';
 import './UserClue.css';
 import UserClueMain from '../ClueMain/UserClueMain';

@@ -8,12 +8,6 @@ import axios from 'axios';
 
 const ProfileBanner = () => {
 
-    interface InterestChoices {
-        interest: string;
-        subInterests: string[] | null;
-    }
-
-
     const {user} = useContext(UserContext);
     const {profileData, setProfileData} = useContext(UserProfileContext);
     const [editProfile, setEditProfile] = useState<boolean>(false);

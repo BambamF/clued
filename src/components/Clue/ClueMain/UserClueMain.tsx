@@ -23,6 +23,7 @@ const ClueMainDisplay: React.FC<ClueMainDisplayProps> = ({clueMainUrl, setClueMa
   const handleCancelClueMain = () => {
     setRawFile(null);
     setClueMainUrl("");
+    if(clueMainUploaded) setClueMainUploaded(false)
     setClueMainUploaded(false);
     setRawFileType("");
   }
@@ -104,8 +105,9 @@ const UserClueMain: React.FC<UserClueMainProps> = ({clueId}) => {
         setRawFileType(response.data.type);
         const url = URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
         return url;
-    } catch (error) {
-        console.error('Error fetching clue main file:', error);
+    } catch (e) {
+        console.error('Error fetching clue main file:', e);
+        console.log(error);
         setError('Failed to fetch the clue main file.');
         return null;
     }

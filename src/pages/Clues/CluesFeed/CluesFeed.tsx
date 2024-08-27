@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './CluesFeed.css';
 
 const CluesFeed = () => {
