@@ -22,7 +22,6 @@ import ClueEditbar from '../ClueEditbar/ClueEditbar';
 
     const UserClue: React.FC<ClueProps> = ({id, userId, dateCreated, timeCreated, userClueTitle, clueLocation, userClueNotes, clueAudio, clueLinks, clueMain, clueMainType}) => {
 
-    const {user} = useContext(UserContext);
     const [clueData, setClueData] = useState<ClueProps>({
         id: id,
         userId: userId,

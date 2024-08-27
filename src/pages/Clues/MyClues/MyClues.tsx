@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext} from 'react';
 import './MyClues.css';
-import CreateClue from '../../../components/Clue/CreateClue';
 import UserClue from '../../../components/Clue/UserClue/UserClue';
 import useAxios from "axios-hooks";
 import { UserContext } from '../../../Context';
@@ -8,7 +7,7 @@ import { UserContext } from '../../../Context';
 const MyClues = () => {
 
   const {user} = useContext(UserContext);
-  const [{data, loading, error}, refetch] = useAxios(`http://localhost:5000/clues/${user?.id}`);
+  const [{data, loading, error}] = useAxios(`http://localhost:5000/clues/${user?.id}`);
 
 
   if (loading) return <p>Loading...</p>;

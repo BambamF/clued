@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './CreateClue.css';
 import ClueMain from './ClueMain/ClueMain';
 import ClueEditbar from './ClueEditbar/ClueEditbar';
@@ -16,7 +16,6 @@ const CreateClue = () => {
   const [clueDate, setClueDate] = useState<Date>(new Date());
   const [clueTitle, setClueTitle] = useState<string>("");
   const [clueMainFile, setClueMainFile] = useState<string>("");
-  const [clueMainFileType, setClueMainFileType] = useState("");
   const [clueTime, setClueTime] = useState(clueDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }));
   const [rawFile, setRawFile] = useState<File | null>(null);
   const [rawFileType, setRawFileType] = useState('');

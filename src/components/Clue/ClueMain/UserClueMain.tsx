@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './UserClueMain.css';
-import { ClueContext, ClueRawFileContext, ClueTitleContext, EditClueContext, UserContext, ClueRawFileTypeContext } from '../../../Context';
+import { ClueContext, ClueRawFileContext, EditClueContext, ClueRawFileTypeContext } from '../../../Context';
 import axios from 'axios';
 import cancelIcon from '../../../public/assets/cancelIcon.png';
 import uploadIcon from '../../../public/assets/uploadIcon.png';
@@ -15,11 +15,10 @@ interface ClueMainDisplayProps {
 //component to dynamically control the clue main view, file uploaded view or edit view
 const ClueMainDisplay: React.FC<ClueMainDisplayProps> = ({clueMainUrl, setClueMainUrl, clueMainType}) => {
 
-  const {rawFile, setRawFile} = useContext(ClueRawFileContext);
-  const {rawFileType, setRawFileType} = useContext(ClueRawFileTypeContext);
+  const {setRawFile} = useContext(ClueRawFileContext);
+  const {setRawFileType} = useContext(ClueRawFileTypeContext);
   const [clueMainUploaded, setClueMainUploaded] = useState(false);
   const {editClue} = useContext(EditClueContext);
-  const {clueData, setClueData} = useContext(ClueContext);
 
   const handleCancelClueMain = () => {
     setRawFile(null);
@@ -84,15 +83,13 @@ interface UserClueMainProps {
 
 const UserClueMain: React.FC<UserClueMainProps> = ({clueId}) => {
 
-  const {user} = useContext(UserContext);
   const {clueData, setClueData} = useContext(ClueContext);
   const [clueMainUrl, setClueMainUrl] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
   const {editClue} = useContext(EditClueContext);
-  const {clueTitle, setClueTitle} = useContext(ClueTitleContext);
   const [clueTitleChange, setClueTitleChange] = useState(clueData.userClueTitle);
-  const {rawFile, setRawFile} = useContext(ClueRawFileContext);
-  const {rawFileType, setRawFileType} = useContext(ClueRawFileTypeContext);
+  const {setRawFile} = useContext(ClueRawFileContext);
+  const {setRawFileType} = useContext(ClueRawFileTypeContext);
 
   const fetchClueMain = async (clueId: string) => {
     try {

@@ -13,12 +13,11 @@ const ClueMain = () => {
     const clueMonth = clueDate.getMonth();
     const clueYear = clueDate.getFullYear();
     const joinedDate = [clueDay, clueMonth+1, clueYear].join('/');
-    const [location, setLocation] = useState<string | null>(null);
     const {clueMainFile, setClueMainFile} = useContext(ClueMainFileContext);
     const [clueMainUploaded, setClueMainUploaded] = useState(false);
     const {rawFile, setRawFile} = useContext(ClueRawFileContext)
-    const {rawFileType, setRawFileType} = useContext(ClueRawFileTypeContext);
-    const {fullDate, setFullDate} = useContext(FullDateContext)
+    const {setRawFileType} = useContext(ClueRawFileTypeContext);
+    const { setFullDate} = useContext(FullDateContext)
 
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {

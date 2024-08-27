@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState} from 'react';
 import './SignUp.css';
 import "react-datepicker/dist/react-datepicker.css";
 import hidePasswordIcon from '../../public/assets/hidePasswordIcon.png';

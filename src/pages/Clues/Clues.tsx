@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import './Clues.css';
-import { UserContext } from '../../Context';
 import CluesFeed from './CluesFeed/CluesFeed';
 import MyClues from './MyClues/MyClues';
 
 const Clues = () => {
 
-  const {user} = useContext(UserContext);
   const [feedView, setFeedView] = useState(false);
 
   const handleFeedView = () => {

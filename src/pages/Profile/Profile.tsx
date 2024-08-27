@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import './Profile.css';
-import userIcon from '../../public/assets/userIcon.png';
 import ProfileInterests from './ProfileInterests';
 import ProfileBanner from './ProfileBanner';
 import { FinalInterestsContext, InitialProfileContext, UserContext, UserProfileContext } from '../../Context';

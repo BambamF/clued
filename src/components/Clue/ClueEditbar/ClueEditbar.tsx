@@ -27,7 +27,7 @@ const ClueEditbar: React.FC<{isUserClue: boolean, isCreateClue: boolean}> = ({is
     const navigate = useNavigate();
     const {rawFileType} = useContext(ClueRawFileTypeContext);    
     const {editClue, setEditClue} = useContext(EditClueContext);
-    const {clueData, setClueData} = useContext(ClueContext);
+    const {clueData} = useContext(ClueContext);
 
     const handleAudioSupplementClick = () => {
       setSupplementActive(true);

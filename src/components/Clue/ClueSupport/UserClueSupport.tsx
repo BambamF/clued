@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './UserClueSupport.css';
 import linkIcon from '../../../public/assets/linkIcon.png';
 

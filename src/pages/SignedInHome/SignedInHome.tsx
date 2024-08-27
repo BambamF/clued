@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './SignedInHome.css';
 
 const SignedInHome = () => {

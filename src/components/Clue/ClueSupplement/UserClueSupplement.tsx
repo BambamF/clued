@@ -1,10 +1,8 @@
 import React, { useContext, useState } from 'react';
 import './UserClueSupplement.css';
-import { ClueContext, EditClueContext, UserContext } from '../../../Context';
+import { ClueContext, EditClueContext} from '../../../Context';
 import playIcon from '../../../public/assets/playIcon.png';
 import audioWaveform from '../../../public/assets/audioWaveform.png';
-import editIcon from '../../../public/assets/editIcon.png';
-import { boolean } from 'zod';
 
 interface EditClueNotesProps {
   editClue: boolean;
@@ -12,7 +10,6 @@ interface EditClueNotesProps {
 }
 
 const EditClueNotes: React.FC<EditClueNotesProps> = ({editClue, clueNotes}) => {
-  const { user } = useContext(UserContext);
   const { clueData, setClueData } = useContext(ClueContext);
   const [clueNotesChange, setClueNotesChange] = useState(clueData.userClueNotes);
 
@@ -58,9 +55,7 @@ const EditClueNotes: React.FC<EditClueNotesProps> = ({editClue, clueNotes}) => {
 
 const UserClueSupplement = () => {
 
-  const {user} = useContext(UserContext);
   const {clueData} = useContext(ClueContext);
-  const [editClueNotes, setEditClueNotes] = useState(false);
   const {editClue} = useContext(EditClueContext)
   
 

@@ -13,12 +13,6 @@ const ProfileBanner = () => {
         subInterests: string[] | null;
     }
 
-    interface UserProfile {
-        userId: number | null;
-        screenName: string | null;
-        userInterests: InterestChoices[] | null;
-        profileImage: File | null;
-    }
 
     const {user} = useContext(UserContext);
     const {profileData, setProfileData} = useContext(UserProfileContext);

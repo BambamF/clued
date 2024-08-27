@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import ProfileButton from './ProfileButton/ProfileButton';
 import SearchBar from './SearchBar/SearchBar';
 import { Link } from "react-router-dom";

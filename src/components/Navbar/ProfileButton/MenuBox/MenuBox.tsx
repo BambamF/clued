@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './MenuBox.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SignedInContext, UserContext } from '../../../../Context';
 
 interface MenuClickedProps{
@@ -25,14 +25,14 @@ const MenuBox = ({setMenuClicked}: MenuClickedProps) => {
         setMenuClicked(false);
       }
     }
-
+/*
     const handleSettingsNavigate = () => {
       if (user?.id) {
         navigate(`/settings/${user.id}`);
         setMenuClicked(false);
       }
     }
-
+*/
     const handleSignOut = () => {
       setSignedIn(false);
       setMenuClicked(false);

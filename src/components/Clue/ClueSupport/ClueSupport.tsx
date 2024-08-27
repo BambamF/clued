@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './ClueSupport.css';
 import linkIcon from '../../../public/assets/linkIcon.png';
 import { useContext } from 'react';

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContext, SignedInContext } from './Context';
@@ -9,7 +9,6 @@ import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import Profile from './pages/Profile/Profile';
 import Clues from './pages/Clues/Clues';
-import Settings from './pages/Settings/Settings';
 import ProtectedRoute from './pages/ProtectedRoute/ProtectedRoute';
 
 function App() {

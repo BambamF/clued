@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import userIcon from '../../../public/assets/userIcon.png';
 import './ProfileButton.css';
 import MenuBox from './MenuBox/MenuBox';

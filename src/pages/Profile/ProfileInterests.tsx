@@ -322,7 +322,7 @@ const ProfileInterests = () => {
         interest: null,
         subInterests: null
     });
-    const {finalInterests, setFinalInterests} = useContext(FinalInterestsContext);
+    const {setFinalInterests} = useContext(FinalInterestsContext);
 
 
     interface InterestChoices {
